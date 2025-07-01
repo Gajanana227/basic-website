@@ -55,7 +55,7 @@ function captureSnapshots() {
       ctx.drawImage(webcam, 0, 0, canvas.width, canvas.height);
       canvas.toBlob((blob) => {
         const paddedId = String(imageCounter).padStart(3, "0");
-        const filename = ${userName}_image_${paddedId}.png;
+        const filename = `${userName}_image_${paddedId}.png`;
 
         snapshots.push({ filename, blob });
         imageCounter++;
@@ -81,7 +81,7 @@ function downloadSnapshots() {
   zip.generateAsync({ type: "blob" }).then((content) => {
     const a = document.createElement("a");
     a.href = URL.createObjectURL(content);
-    a.download = ${userName}_Snapshots.zip;
+    a.download = `${userName}_Snapshots.zip`;
     a.click();
   });
 }
