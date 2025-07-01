@@ -55,7 +55,7 @@ function captureSnapshots() {
         snapshotsDiv.appendChild(img);
       }, "image/png");
     }, randomDelay);
-  }, 2500);
+  }, 2000);
 }
 
 function downloadSnapshots() {
