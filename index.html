@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Webcam Snapshot Capture</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Webcam Snapshot Capture</h1>
+
+    <div class="controls">
+      <button id="startBtn">Start</button>
+      <button id="stopBtn" disabled>Stop</button>
+    </div>
+
+    <video id="webcam" autoplay playsinline></video>
+
+    <div id="snapshots"></div>
+
+    <!--<script src="jszip.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
