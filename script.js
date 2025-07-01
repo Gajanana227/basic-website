@@ -7,14 +7,24 @@ let stream;
 let captureInterval;
 let snapshots = [];
 let zip = new JSZip();
+let userName = "";
+let imageCounter = 1;
 
 startBtn.addEventListener("click", async () => {
+  userName = prompt("Enter your name:");
+
+  if (!userName) {
+    alert("Please enter a valid name to start.");
+    return;
+  }
+
   stream = await navigator.mediaDevices.getUserMedia({ video: true });
   webcam.srcObject = stream;
 
   startBtn.disabled = true;
   stopBtn.disabled = false;
   snapshots = [];
+  imageCounter = 1;
   zip = new JSZip();
   snapshotsDiv.innerHTML = "";
 
@@ -38,17 +48,17 @@ function captureSnapshots() {
   canvas.width = 400;
   canvas.height = 300;
 
-  // At least 4 snapshots every 10 seconds, so roughly every 2.5 seconds, random offset
   captureInterval = setInterval(() => {
     const randomDelay = Math.random() * 2000;
 
     setTimeout(() => {
       ctx.drawImage(webcam, 0, 0, canvas.width, canvas.height);
       canvas.toBlob((blob) => {
-        const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-        const filename = `snapshot-${timestamp}.png`;
+        const paddedId = String(imageCounter).padStart(3, "0");
+        const filename = ${userName}_image_${paddedId}.png;
 
         snapshots.push({ filename, blob });
+        imageCounter++;
 
         const img = document.createElement("img");
         img.src = URL.createObjectURL(blob);
@@ -71,9 +81,7 @@ function downloadSnapshots() {
   zip.generateAsync({ type: "blob" }).then((content) => {
     const a = document.createElement("a");
     a.href = URL.createObjectURL(content);
-    a.download = `Snapshots_${new Date()
-      .toISOString()
-      .replace(/[:.]/g, "-")}.zip`;
+    a.download = ${userName}_Snapshots.zip;
     a.click();
   });
 }
